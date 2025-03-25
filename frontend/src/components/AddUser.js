@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { BASE_URL } from "./utils";
 
 const AddUser = () => {
     const [date, setDate] = useState("");
@@ -12,7 +13,7 @@ const AddUser = () => {
     const saveNote = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:5002/notes", {
+            await axios.post(`${BASE_URL}/notes`, {
                 date,
                 title,
                 content,
