@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { BASE_URL } from "./utils";
+import { BASE_URL } from "./utils.js";
 
 const EditUser = () => {
     const [date, setDate] = useState("");

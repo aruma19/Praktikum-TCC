@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { BASE_URL } from "./utils";
+import { BASE_URL } from "./utils.js";
 
 const AddUser = () => {
     const [date, setDate] = useState("");
@@ -83,7 +83,7 @@ const AddUser = () => {
                                 className="button is-light is-rounded has-text-weight-semibold is-flex-grow-1 mx-1"
                                 onClick={() => navigate(-1)}
                             >
-                                Kembali
+                                Kembali 
                             </button>
                             <button
                                 type="submit"
