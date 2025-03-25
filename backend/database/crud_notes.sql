@@ -17,6 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+-- Gunakan database yang sesuai
+CREATE DATABASE IF NOT EXISTS crud_notes;
+USE crud_notes;
+
+-- Pastikan tabel tidak ada sebelum dibuat
+DROP TABLE IF EXISTS notes;
+
 --
 -- Database: `crud_notes`
 --
