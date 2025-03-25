@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { BASE_URL } from "./utils";
 
 const EditUser = () => {
     const [date, setDate] = useState("");
@@ -13,7 +14,7 @@ const EditUser = () => {
     useEffect(() => {
         const getNoteById = async () => {
             try {
-                const response = await axios.get(`http://localhost:5002/notes/${id}`);
+                const response = await axios.get(`${BASE_URL}/notes/${id}`);
                 setDate(response.data.date ? response.data.date.substring(0, 10) : "");
                 setTitle(response.data.title);
                 setContent(response.data.content);
@@ -39,7 +40,7 @@ const EditUser = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.patch(`http://localhost:5002/notes/${id}`, {
+                    await axios.patch(`${BASE_URL}/notes/${id}`, {
                         date,
                         title,
                         content,
