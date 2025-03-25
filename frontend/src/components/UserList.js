@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { BASE_URL } from "./utils";
 
 const UserList = () => {
     const [notes, setNotes] = useState([]);
@@ -11,7 +12,7 @@ const UserList = () => {
     }, []);
 
     const getNotes = async () => {
-        const response = await axios.get("http://localhost:5002/notes");
+        const response = await axios.get(`${BASE_URL}/notes`);
         setNotes(response.data);
     };
 
@@ -28,7 +29,7 @@ const UserList = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`http://localhost:5002/notes/${id}`);
+                    await axios.delete(`${BASE_URL}/notes/${id}`);
     
                     // Notifikasi sukses
                     Swal.fire("Dihapus!", "Data berhasil dihapus.", "success");
