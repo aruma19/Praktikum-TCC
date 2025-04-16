@@ -7,5 +7,5 @@ app.use(cors());
 app.use(express.json()); //menerima req dalam format json
 app.use(UserRoute);
 
-app.listen(5001, ()=>  
+app.listen(5002, ()=>  
     console.log('Server up and running...'));  
