@@ -1,1 +1,1 @@
-export const BASE_URL = "https://notes-backend-farros-572347789402.us-central1.run.app"; 
+export const BASE_URL = "https://backend-572347789402.us-central1.run.app"; 
