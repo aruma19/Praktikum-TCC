@@ -12,8 +12,22 @@ const UserList = () => {
     }, []);
 
     const getNotes = async () => {
-        const response = await axios.get(`${BASE_URL}/notes`);
-        setNotes(response.data);
+        try {
+            const token = localStorage.getItem("accessToken"); // ambil token dari localStorage
+            const response = await axios.get(`${BASE_URL}/notes`, {
+                headers: {
+                    Authorization: `Bearer ${token}` // kirim token ke backend
+                }
+            });
+            setNotes(response.data);
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: "Gagal mengambil data",
+                text: error.response?.data?.message || "Terjadi kesalahan saat mengambil data catatan.",
+            });
+        }
     };
 
     const deleteNote = async (id) => {
@@ -29,18 +43,27 @@ const UserList = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`${BASE_URL}/notes/${id}`);
-    
-                    // Notifikasi sukses
-                    Swal.fire("Dihapus!", "Data berhasil dihapus.", "success");
+                    const token = localStorage.getItem("accessToken");
+                    await axios.delete(`${BASE_URL}/notes/${id}`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    });
 
+                    Swal.fire("Dihapus!", "Data berhasil dihapus.", "success");
                     setNotes(notes.filter(note => note.id !== id));
                 } catch (error) {
                     console.log(error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Gagal menghapus",
+                        text: error.response?.data?.message || "Terjadi kesalahan saat menghapus data.",
+                    });
                 }
             }
         });
     };
+
     return (
         <div className="columns mt-5 is-centered">
             <div className="column is-three-quarters">

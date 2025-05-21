@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { BASE_URL } from "../utils";
 
-const AddUser = () => {
+const AddNote = () => {
     const [date, setDate] = useState("");
     const [title, setTitle] = useState("Kuliner");
     const [content, setContent] = useState("");
@@ -12,22 +12,63 @@ const AddUser = () => {
 
     const saveNote = async (e) => {
         e.preventDefault();
+        if (!date || !title || !content) {
+            Swal.fire({
+                title: "Gagal!",
+                text: "Semua field harus diisi.",
+                icon: "warning",
+                confirmButtonText: "OK",
+            });
+            return;
+        }
+
         try {
+            // Ambil token dari localStorage
+            const token = localStorage.getItem("accessToken");
+            
+            if (!token) {
+                Swal.fire({
+                    title: "Sesi Berakhir!",
+                    text: "Sesi anda telah berakhir. Silahkan login kembali.",
+                    icon: "error",
+                    confirmButtonText: "OK",
+                });
+                navigate("/");
+                return;
+            }
+
+            // Kirim request dengan token otorisasi
             await axios.post(`${BASE_URL}/notes`, {
                 date,
                 title,
                 content,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
-            // Notifikasi sukses
+            
             Swal.fire({
                 title: "Berhasil!",
                 text: "Catatan berhasil ditambahkan.",
                 icon: "success",
                 confirmButtonText: "OK",
             });
-            navigate("/");
+            
+            // Navigasi ke dashboard setelah berhasil
+            navigate("/dashboard");
         } catch (error) {
-            console.log(error);
+            console.error("Error detail:", error.response?.data || error.message);
+            
+            // Pesan error yang lebih spesifik
+            const errorMessage = error.response?.data?.message || "Terjadi kesalahan saat menyimpan data.";
+            
+            Swal.fire({
+                title: "Gagal!",
+                text: errorMessage,
+                icon: "error",
+                confirmButtonText: "OK",
+            });
         }
     };
 
@@ -46,6 +87,7 @@ const AddUser = () => {
                                     className="input is-rounded"
                                     value={date}
                                     onChange={(e) => setDate(e.target.value)}
+                                    required
                                 />
                             </div>
                         </div>
@@ -73,6 +115,7 @@ const AddUser = () => {
                                     value={content}
                                     onChange={(e) => setContent(e.target.value)}
                                     placeholder="Masukkan catatan Anda..."
+                                    required
                                 />
                             </div>
                         </div>
@@ -81,9 +124,9 @@ const AddUser = () => {
                             <button
                                 type="button"
                                 className="button is-light is-rounded has-text-weight-semibold is-flex-grow-1 mx-1"
-                                onClick={() => navigate(-1)}
+                                onClick={() => navigate("/dashboard")}
                             >
-                                Kembali 
+                                Kembali
                             </button>
                             <button
                                 type="submit"
@@ -92,7 +135,6 @@ const AddUser = () => {
                                 Simpan Catatan
                             </button>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -100,4 +142,4 @@ const AddUser = () => {
     );
 };
 
-export default AddUser;
+export default AddNote;

@@ -1,17 +1,32 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
 
-const { DataTypes } = Sequelize;
+const User = db.define(
+  "users",
+  {
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    gender: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    refresh_token: Sequelize.TEXT,
+  },
+  {
+    freezeTableName: true,
+  }
+);
 
-const Note = db.define('notes', {
-    date : DataTypes.DATE,
-    title : DataTypes.STRING,
-    content : DataTypes.TEXT
-},{
-    freezeTableName:true
-});
-export default Note;    
+db.sync().then(() => console.log("Database synced"));
 
-(async() => {
-    await db.sync();
-})();
+export default User;
