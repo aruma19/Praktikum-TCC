@@ -22,8 +22,6 @@ steps:
         "gcr.io/$PROJECT_ID/notes-backend-farros",
         "--timeout",
         "3600s",
-        "--port",
-        "8080",
         "--region",
         "asia-southeast2",
         "--allow-unauthenticated"
