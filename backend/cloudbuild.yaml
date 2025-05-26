@@ -23,7 +23,7 @@ steps:
         "--timeout",
         "3600s",
         "--port",
-        "5000",
+        "5002",
         "--region",
         "asia-southeast2",
         "--allow-unauthenticated"
