@@ -22,8 +22,7 @@ app.use(express.json());
 app.get("/", (req, res) => res.render("index"));
 app.use(UserRoute);
 
-// Sinkronisasi database
-// === Log eksplisit koneksi database sebelum sync ===
+// Sinkronisasi database dan jalankan server
 (async () => {
   try {
     console.log("📡 Menghubungkan ke database:", process.env.DB_HOST);
@@ -33,8 +32,11 @@ app.use(UserRoute);
     await db.sync(); // Atau db.sync({ force: true }) jika ingin reset tabel
     console.log("✅ Sinkronisasi model ke DB berhasil");
 
-    app.listen(8080, () => console.log("🚀 Server connected on port 8080"));
+    const PORT = process.env.PORT || 8080;
+    app.listen(PORT, () =>
+      console.log(`🚀 Server connected on port ${PORT}`)
+    );
   } catch (error) {
     console.error("❌ Gagal koneksi atau sinkronisasi DB:", error.message);
-  }
+  }
 })();
