@@ -27,8 +27,12 @@ app.use(UserRoute);
   try {
     await db.sync(); // Atau db.sync({ force: true }) jika ingin reset tabel
     console.log("Database synced!");
-    
-    app.listen(5002, () => console.log("Server connected on port 5002"));
+
+    const port = process.env.PORT || 8080;
+    app.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
+
   } catch (error) {
     console.error("DB Sync Error:", error);
   }
