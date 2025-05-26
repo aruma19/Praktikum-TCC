@@ -1,7 +1,7 @@
 steps:
   # Mengambil data env yang disimpan di cloud storage menggunakan gsutil
   - name: "gcr.io/cloud-builders/gsutil"
-    args: ["cp", "gs://<bucket-name>/${_ENV}", ".env"]
+    args: ["cp", "gs://tcc-f08-133/.env", ".env"]
 
   # Membuat image dengan perintah "docker build -t gcr.io/$PROJECT_ID/notes-backend-farros ."
   - name: "gcr.io/cloud-builders/docker"
@@ -22,8 +22,6 @@ steps:
         "gcr.io/$PROJECT_ID/notes-backend-farros",
         "--timeout",
         "3600s",
-        "--port",
-        "8080",
         "--region",
         "asia-southeast2",
         "--allow-unauthenticated"
