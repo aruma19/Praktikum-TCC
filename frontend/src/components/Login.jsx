@@ -40,62 +40,63 @@ const Login = () => {
   };
 
   return (
-    <div className="columns is-centered mt-6">
-      <div className="column is-half">
-        <div className="box has-shadow p-5" style={{ borderRadius: "12px" }}>
-          <h2 className="title is-4 has-text-centered has-text-primary">Login</h2>
+    <div className="section is-flex is-justify-content-center is-align-items-center" style={{ minHeight: "100vh" }}>
+      <div className="box p-5" style={{ width: "100%", maxWidth: "420px", borderRadius: "16px" }}>
+        <h2 className="title is-3 has-text-centered has-text-primary mb-4">Login</h2>
 
-          {msg && (
-            <p className="has-text-centered has-text-danger" style={{ marginBottom: "1rem" }}>
-              {msg}
-            </p>
-          )}
+        {msg && (
+          <div className="notification is-danger is-light has-text-centered mb-4 py-3">
+            {msg}
+          </div>
+        )}
 
-          <form onSubmit={loginHandler}>
-            <div className="field">
-              <label className="label">Email</label>
-              <div className="control">
-                <input
-                  type="email"
-                  className="input is-rounded"
-                  placeholder="Masukkan email..."
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
+        <form onSubmit={loginHandler}>
+          <div className="field">
+            <label className="label is-size-6">Email</label>
+            <div className="control">
+              <input
+                type="email"
+                className="input is-rounded"
+                placeholder="Masukkan email..."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
+          </div>
 
-            <div className="field">
-              <label className="label">Password</label>
-              <div className="control">
-                <input
-                  type="password"
-                  className="input is-rounded"
-                  placeholder="Masukkan password..."
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
+          <div className="field">
+            <label className="label is-size-6">Password</label>
+            <div className="control">
+              <input
+                type="password"
+                className="input is-rounded"
+                placeholder="Masukkan password..."
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
             </div>
+          </div>
 
-            <div className="field mt-4">
-              <button type="submit" className="button is-primary is-rounded is-fullwidth">
-                Login
-              </button>
-            </div>
-          </form>
-
-          {/* Tambah tombol untuk pindah ke halaman Register */}
-          <div className="has-text-centered mt-4">
+          <div className="field mt-5">
             <button
-              className="button is-link is-light is-rounded"
-              onClick={() => navigate("/register")}
+              type="submit"
+              className="button is-primary is-rounded is-fullwidth is-medium"
             >
-              Daftar Akun Baru
+              Login
             </button>
           </div>
+        </form>
+
+        <div className="has-text-centered mt-4">
+          <p className="is-size-7 mb-2">Belum punya akun?</p>
+          <button
+            className="button is-link is-light is-rounded is-small"
+            onClick={() => navigate("/register")}
+          >
+            Daftar Akun Baru
+          </button>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ export const verifyToken = (req, res, next) => {
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
     if (err) return res.sendStatus(403);
 
-    // ⬇️ Tambahkan ini untuk menyimpan userId ke request
+    // Tambahkan ini untuk menyimpan userId ke request
     req.userId = decoded.id;  // <-- PENTING!
     req.email = decoded.email;
 
