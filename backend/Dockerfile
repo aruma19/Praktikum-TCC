@@ -4,9 +4,6 @@ FROM node:20-alpine
 # Tentukan direktori kerja
 WORKDIR /app
 
-# Copy file dependensi
-COPY . .
-
 # Install dependensi
 RUN npm install
 
