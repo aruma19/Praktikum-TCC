@@ -61,7 +61,6 @@ async function createNote(req, res) {
   }
 };
 
-
 //Membuat update Note
 async function updateNote(req, res) {
   try {
@@ -74,9 +73,7 @@ async function updateNote(req, res) {
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
-
 }
-
 
 //Membuat delete Note
 async function deleteNote(req, res) {
