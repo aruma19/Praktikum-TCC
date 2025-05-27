@@ -15,7 +15,7 @@ const app = express();
 dotenv.config();
 
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: "https://notes-frontend-farros-dot-f-08-450706.uc.r.appspot.com/" }));
+app.use(cors({ credentials: true, origin: "https://notes-frontend-farros-dot-f-08-450706.uc.r.appspot.com" }));
 app.use(express.json());
 
 app.use(UserRoute);
