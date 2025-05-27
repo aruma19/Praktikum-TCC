@@ -1,7 +1,22 @@
-FROM node:20-alpine 
-WORKDIR /app 
-COPY . . 
+# Gunakan image Node.js ringan
+FROM node:20-alpine
+
+# Tentukan direktori kerja
+WORKDIR /app
+
+# Copy file dependensi
+COPY . .
+
+# Install dependensi
+RUN npm install
+
 RUN cat .env
-RUN npm install --production
+
+# Copy semua file proyek
+COPY . .
+
+# Buka port 5000 (meskipun Cloud Run override ini, tetap baik untuk dokumentasi)
 EXPOSE 5002
-CMD ["node", "index.js"] 
+
+# Jalankan aplikasi
+CMD ["node", "index.js"]
