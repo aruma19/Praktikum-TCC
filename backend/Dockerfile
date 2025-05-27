@@ -16,7 +16,7 @@ RUN cat .env
 COPY . .
 
 # Buka port 5000 (meskipun Cloud Run override ini, tetap baik untuk dokumentasi)
-EXPOSE 5005
+EXPOSE 5002
 
 # Jalankan aplikasi
 CMD ["node", "index.js"]
